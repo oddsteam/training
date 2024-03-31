@@ -62,7 +62,28 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
             <p> This is course outline.</p>
           </div>
         </div>
-        <div className="mb-4 w-1/3 bg-green-200 rounded">Trainer</div>
+        <div className="mb-4 w-1/3 rounded flex flex-col">
+          <div className="flex flex-col items-center border-solid border-b-4 m-4">
+            <Image
+              src="/odds-buly.jpeg"
+              width={200}
+              height={200}
+              className="block rounded-lg object-center"
+              alt="Picture of the author"
+            />
+            <h1 className="m-5">Phongsak Ritpitakphong</h1>
+          </div>
+          <div className="flex flex-col items-center border-solid border-b-4 m-5">
+            <Image
+              src="/odds-buly.jpeg"
+              width={200}
+              height={200}
+              className="block rounded-lg object-center"
+              alt="Picture of the author"
+            />
+            <h1 className="m-5">Phongsak Ritpitakphong</h1>
+          </div>
+        </div>
       </div>
     </>
   );
