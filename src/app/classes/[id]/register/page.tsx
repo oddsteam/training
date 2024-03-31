@@ -19,6 +19,10 @@ const RegisterForm = () => {
     setIsOpen(!isOpen);
   };
 
+  const navigateTo = (url:string) => {
+    window.location.href = url;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -209,7 +213,7 @@ const RegisterForm = () => {
                   Please check your email
                 </p>
                 <button
-                  onClick={toggleModal}
+                  onClick={() => navigateTo("/classes")}
                   type="button"
                   className="py-2 px-3 text-sm font-medium text-center rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900 bg-blue-700 text-white hover:bg-blue-600"
                 >
