@@ -1,4 +1,4 @@
-name: Continuous Integration (Dev)
+name: Continuous Integration (Prod)
 
 on:
   push:
