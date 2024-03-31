@@ -7,24 +7,25 @@ export default async function ClassDetail() {
 return <div className="h-max">
   <div>
   <div>
-      <h1>[Class name]</h1>
+      <h1>[{classDetail.name}]</h1>
       <h2>Class detail</h2>
-      <p>some thing some thing some thing some thing</p>
+      <p>{classDetail.description}</p>
       <p>
         <span>เปิดรับ:</span>
-        <span>20 คน</span>
+        <span>{classDetail.maxParticipant} คน</span>
         <span>category name</span>
       </p>
       <p>
-        <span>วันที่เรียน: วันจันทร์ ที่ 1 มกราคม 2564 - วันศุกร์ ที่ 31 ธันวาคม 2564</span>
+        <span>วันที่เรียน: {classDetail.startDate} - {classDetail.endDate}</span>
+        <span>เวลาที่เรียน: {classDetail.startTime} - {classDetail.endTime}</span>
         <span> </span>
         <span>สถานที่เรียน: </span>
-        <a href="www.google.com" >link</a>
+        <a href={classDetail.googleMapUrl} >link</a>
       </p>
     </div>
     <div>
       <h2>สิ่งที่ต้องเตรียม</h2>
-      <p>some thing some thing some thing some thing </p>
+      <p>{classDetail.prerequisite}</p>
     </div>
   </div>
 <div>
