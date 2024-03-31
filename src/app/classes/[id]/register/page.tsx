@@ -24,15 +24,7 @@ const RegisterForm = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fullNameErrorMsg = formData.fullName
-      ? ""
-      : "The full name field is required";
-    const emailErrorMsg = formData.email ? "" : "The email field is required";
     const { name, value } = e.target;
-    setFormDataErrorMsg({
-      fullName: fullNameErrorMsg,
-      email: emailErrorMsg,
-    });
     setFormData({
       ...formData,
       [name]: value,
