@@ -35,21 +35,21 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="flex w-full justify-between p-4 gap-2 bg-white">
-        <div className="flex flex-col w-2/3 bg-white rounded">
+      <div className="flex w-full justify-between gap-2 bg-white">
+        <div className="flex flex-col w-2/3 bg-white border-r-2 border-blue-300">
           <div className="w-full flex m-4">
-            <div className="w-1/2">
-              <div className="m-4">
-                <p className="font-bold">Course Name</p>
-                <p className="font-medium"> {data?.courseName}</p>
+            <div className="ms-2 mb-6 w-1/2">
+              <div className="mb-6">
+                <p className="font-xl font-bold">{data?.courseName}</p>
+                <p className="font-base"> This is detail course xxxxxx.</p>
               </div>
-              <div className="m-4">
-                <p className="font-bold">Course Outline</p>
-                <p className="font-medium"> {data?.outline}</p>
+              <div className="mb-6">
+                <h1 className="font-xl font-bold">Outline</h1>
+                <p className="font-base"> This is course outline.</p>
               </div>
-              <div className="m-4">
-                <p className="font-bold">Durations</p>
-                <p className="font-medium"> {data?.duration} days</p>
+              <div className="mb-6">
+                <h1 className="font-xl font-bold">Duration</h1>
+                <p> This is course outline.</p>
               </div>
             </div>
 
