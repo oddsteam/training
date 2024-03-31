@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 const RegisterForm = () => {
-  const params = useParams<{ id: string;}>()
+  const params = useParams<{ id: string }>();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -19,12 +19,20 @@ const RegisterForm = () => {
     setIsOpen(!isOpen);
   };
 
-  const navigateTo = (url:string) => {
+  const navigateTo = (url: string) => {
     window.location.href = url;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fullNameErrorMsg = formData.fullName
+      ? ""
+      : "The full name field is required";
+    const emailErrorMsg = formData.email ? "" : "The email field is required";
     const { name, value } = e.target;
+    setFormDataErrorMsg({
+      fullName: fullNameErrorMsg,
+      email: emailErrorMsg,
+    });
     setFormData({
       ...formData,
       [name]: value,
@@ -39,10 +47,20 @@ const RegisterForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     validateOnSubmit(formData.fullName, formData.email);
-    callRegisterService(formData.fullName, formData.email, formData.company, formData.phone);
+    callRegisterService(
+      formData.fullName,
+      formData.email,
+      formData.company,
+      formData.phone
+    );
   };
 
-  const callRegisterService = async (fullName: string, email: string, company: string, phone: string) => {
+  const callRegisterService = async (
+    fullName: string,
+    email: string,
+    company: string,
+    phone: string
+  ) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
       method: "POST",
       headers: {
@@ -56,11 +74,11 @@ const RegisterForm = () => {
         classId: params.id,
       }),
     });
-  }
+  };
 
   const validateOnSubmit = (fullName: string, email: string) => {
-    let fullNameErrorMsg = fullName ? "" : "The full name field is required";
-    let emailErrorMsg = email ? "" : "The email field is required";
+    const fullNameErrorMsg = fullName ? "" : "The full name field is required";
+    const emailErrorMsg = email ? "" : "The email field is required";
     setFormDataErrorMsg({
       fullName: fullNameErrorMsg,
       email: emailErrorMsg,
@@ -104,9 +122,11 @@ const RegisterForm = () => {
               onChange={handleChange}
               className="border p-2 rounded w-full"
             />
-            {formDataErrorMsg.fullName && <label className="mb-1 text-red-500">
-              {formDataErrorMsg.fullName}
-            </label>}
+            {formDataErrorMsg.fullName && (
+              <label className="mb-1 text-red-500">
+                {formDataErrorMsg.fullName}
+              </label>
+            )}
           </div>
           <div className="flex flex-col ">
             <label htmlFor="email" className="mb-1">
@@ -120,9 +140,11 @@ const RegisterForm = () => {
               onChange={handleChange}
               className="border p-2 rounded w-full"
             />
-            {formDataErrorMsg.email && <label className="mb-1 text-red-500">
-              {formDataErrorMsg.email}
-            </label>}
+            {formDataErrorMsg.email && (
+              <label className="mb-1 text-red-500">
+                {formDataErrorMsg.email}
+              </label>
+            )}
           </div>
           <div className="flex flex-col ">
             <label htmlFor="company" className="mb-1">
