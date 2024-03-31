@@ -64,18 +64,16 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v1.0.3
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DOCKER_IMAGE: ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
+          DOCKER_IMAGE_WITH_TAG: ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
         with:
           host: ${{ secrets.HOST }}
           username: ubuntu
           key: ${{ secrets.HOST_KEY }}
           port: 22
+          envs: DOCKER_IMAGE_WITH_TAG
           script: |
             export $AWS_ACCESS_KEY_ID
             export $AWS_SECRET_ACCESS_KEY
-            export $DOCKER_IMAGE_WITH_TAG
             echo "hello"
             echo "$DOCKER_IMAGE_WITH_TAG"
             aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 844772501268.dkr.ecr.ap-southeast-1.amazonaws.com
