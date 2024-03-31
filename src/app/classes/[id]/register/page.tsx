@@ -75,7 +75,7 @@ const RegisterForm = () => {
     }
   };
 
-  const isFormNotValid = () => {
+  const isFormValid = () => {
     const fullNameErrorMsg = formData.fullName;
     const emailErrorMsg = formData.email;
     return !fullNameErrorMsg || !emailErrorMsg;
@@ -149,8 +149,9 @@ const RegisterForm = () => {
           </div>
           <button
             type="submit"
+            disabled={isFormValid()}
             className={`col-span-2 px-4 py-2 rounded justify-self-end ${
-              !isFormNotValid()
+              !isFormValid()
                 ? "bg-blue-700 text-white hover:bg-blue-600"
                 : "bg-blue-100 text-blue-300 cursor-not-allowed"
             }`}
