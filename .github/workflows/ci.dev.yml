@@ -3,7 +3,7 @@ name: Continuous Integration (Dev)
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+-dev'
+      - '[0-9]+.[0-9]+.[0-9]+-dev'
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -68,14 +68,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DOCKER_IMAGE: ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
         with:
-          host: ${{ secrets.HOST_DEV }}
+          host: ${{ secrets.HOST }}
           username: ubuntu
-          key: ${{ secrets.HOST_DEV_KEY }}
+          key: ${{ secrets.HOST_KEY }}
           port: 22
           script: |
             export $AWS_ACCESS_KEY_ID
             export $AWS_SECRET_ACCESS_KEY
             aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 844772501268.dkr.ecr.ap-southeast-1.amazonaws.com
             docker pull $DOCKER_IMAGE
-            docker run -p 3000:3001 $DOCKER_IMAGE
-
+            docker run -p 3000:3000 $DOCKER_IMAGE
