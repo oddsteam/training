@@ -3,113 +3,31 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-export default function Classes() {
+async function getData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/classes`);
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
-  const data = [
-    {
-      id: 1,
-      name: 'DDD',
-      description: 'Domain Driver Design',
-      startDate: '6 April',
-      endDate: '8 April',
-      startTime: '9:00',
-      endTime: '17:00',
-      duration: 3,
-      maxParticipant: 30,
-      participants: 20,
-      price: 2000,
-      instructions: [
-        {
-          name: 'Roofimon',
-        }
-      ],
-      teachingAssistant: [
-        {
-          name: 'Toptoppy'
-        }
-      ],
-      location: 'Geeky Base All Star'
-    },
-    {
-      id: 2,
-      name: 'Hello World',
-      description: 'Test Driver Design',
-      startDate: '6 April',
-      endDate: '8 April',
-      startTime: '9:00',
-      endTime: '17:00',
-      duration: 3,
-      maxParticipant: 30,
-      participants: 15,
-      price: 3000,
-      instructions: [
-        {
-          name: 'Roofimon',
-        }
-      ],
-      teachingAssistant: [
-        {
-          name: 'Toptoppy'
-        }
-      ],
-      location: 'Geeky Base All Star'
-    },
-    {
-      id: 3,
-      name: 'Scrum Marster Compass',
-      description: 'ตอนผู้สอนทั้ง 2 มาเป็น ScrumMaster ใหม่ ๆ เราพบช่วงเวลายากลำบากหลายครั้ง เราเคยสับสนว่า ScrumMaster ควรทำมากแค่ไหนจึงจะเพียงพอ หรือแค่ไหนที่เรียกว่าทำมากไปจนเป็นการริดรอนโอกาสเติบโตของทีม บางครั้งเราก็รู้สึกท้อแท้ เพราะปัญหาที่ทีมเผชิญมันหนักมากจนเราไม่รู้ว่าจะช่วยพวกเขาอย่างไร บางครั้งเราก็มองไม่เห็นว่าเราจะพาทีมที่เราดูแลไปไกลกว่านี้ได้อย่างไร ทำให้เราต้องหาหนังสือมาอ่าน ไปเรียน ไปแลกเปลี่ยนกับ ScumMaster ท่านอื่น จนก้าวผ่านช่วงเวลาเหล่านั้นมาได้ คอร์สนี้เราสองคนช่วยกันรวบรวมประสบการณ์ที่เราผ่านมาเพื่อมาแบ่งปันกับผู้เรียน ด้วยความหวังว่าจะช่วยให้มุมมองใหม่ ๆ ให้กำลังใจกับผู้ที่เป็น ScrumMaster, โค้ช หรือผู้นำท่านอื่น ๆ ที่สนใจเนื้อหาในคอร์สจะประกอบด้วยทั้งด้าน soft skills เช่น การสื่อสารเพื่อสานสัมพันธ์, การวางตัวเพื่อเปิดพื้นที่ให้ทีมได้เติบโต และด้าน hard skills เช่น เทคนิคการ facilitate meeting, การ facilitate decision making สำหรับคนหมู่มาก, การให้ feedback รวมถึงประสบการณ์ทั้งจาก internal coach และ external coach จากผู้สอนทั้งสอง การเรียนการสอนจะเน้นกิจกรรมเพื่อให้ผู้เข้าร่วมสัมผัสกับประสบการณ์ตรงว่าปัจจัยต่างๆมีผลการทบกับเราอย่างไร โดย 50% จะเป็น lecture และอีก 50% จะเป็น workshop',
-      startDate: '6 April',
-      endDate: '8 April',
-      startTime: '9:00',
-      endTime: '17:00',
-      duration: 1,
-      maxParticipant: 30,
-      participants: 1,
-      price: 4000,
-      instructions: [
-        {
-          name: 'Roofimon',
-        }
-      ],
-      teachingAssistant: [
-        {
-          name: 'Toptoppy'
-        }
-      ],
-      location: 'Geeky Base All Star'
-    },
-    {
-      id: 4,
-      name: 'Hello World',
-      description: 'Test Driver Design',
-      startDate: '6 April',
-      endDate: '8 April',
-      startTime: '9:00',
-      endTime: '17:00',
-      duration: 3,
-      maxParticipant: 30,
-      participants: 30,
-      price: 3000,
-      instructions: [
-        {
-          name: 'Roofimon',
-        }
-      ],
-      teachingAssistant: [
-        {
-          name: 'Toptoppy'
-        }
-      ],
-      location: 'Geeky Base All Star'
-    }
-  ]
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
 
+  return res.json();
+}
+
+export default async function Classes() {
+  const data = await getData();
+  const classes = data.data
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <h1>Hello, Classes List Page!</h1>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-300 dark:text-black">
           <tr>
+            <th scope="col" className="px-6 py-3">
+              Class Name
+            </th>
             <th scope="col" className="px-6 py-3">
               Date
             </th>
@@ -132,15 +50,17 @@ export default function Classes() {
         </thead>
         <tbody>
           {
-            data.map((datas) => (
+            
+            classes.map((classData) => (
               ClassItem(
-                datas.id,
-                datas.startDate,
-                datas.instructions,
-                datas.price,
-                datas.participants,
-                datas.maxParticipant,
-                datas.location
+                classData.id,
+                classData.className,
+                classData.startDate,
+                classData.intructure,
+                classData.price,
+                classData.participants,
+                classData.maxParticipant,
+                classData.location
               )
             ))
           }
@@ -154,8 +74,9 @@ export default function Classes() {
 
 function ClassItem(
   id: number,
+  className: string,
   startDate: string,
-  instructions: Array<{ name: string }>,
+  intructures: Array<{ name: string }>,
   price: number,
   participants: number,
   maxParticipant: number,
@@ -164,11 +85,14 @@ function ClassItem(
   return <>
     <tr className="bg-white border-b dark:bg-white dark:border-gray-200 hover:bg-blue-100 dark:hover:bg-blue-100 text-black" key={id}>
 
+      <td className="px-6 py-4">
+        {className}
+      </td>
       <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
         {startDate}
       </th>
       <td className="px-6 py-4">
-        {instructions?.map(instruction => (instruction?.name))}
+        {intructures?.map(instruction => (instruction?.name))}
       </td>
       <td className="px-6 py-4">
         {price}
