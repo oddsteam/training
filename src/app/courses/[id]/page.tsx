@@ -57,10 +57,10 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
               {data?.images.map((image) => (
                 <Image
                   key={image}
-                  src="/odds-buly.jpeg"
+                  src={image}
                   width={200}
                   height={200}
-                  className="block rounded-lg object-center"
+                  className="block rounded-lg object-center object-fill"
                   alt="Picture of the author"
                 />
               ))}
