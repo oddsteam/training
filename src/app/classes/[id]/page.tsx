@@ -1,8 +1,6 @@
 export default async function ClassDetail({ params }: { params: { id: string } }) {
   const classDetail = await getClassDetail(params.id)
   console.log(classDetail);
-  const classRemaing = await getClassRemaing(params.id)
-  console.log(classRemaing);
   return <div className="h-max max-w-full">
     <div className="p-16">
       <div className="flex lg:flex-row gap-4">

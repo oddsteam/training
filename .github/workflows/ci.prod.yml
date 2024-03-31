@@ -1,4 +1,4 @@
-name: Continuous Integration (Dev)
+name: Continuous Integration (Prod)
 
 on:
   push:
@@ -79,4 +79,4 @@ jobs:
             aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 844772501268.dkr.ecr.ap-southeast-1.amazonaws.com
             docker pull $DOCKER_IMAGE_WITH_TAG
             docker rm -f training | true
-            docker run -p 3000:3000 --name training -e API_URL=training-api.odds.team $DOCKER_IMAGE_WITH_TAG
+            docker run -p 3000:3000 --name training -e NEXT_PUBLIC_API_URL=https://training-api.odds.team -d $DOCKER_IMAGE_WITH_TAG
