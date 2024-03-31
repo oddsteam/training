@@ -1,20 +1,31 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
 export default function CourseDetail({ params }: { params: { id: string } }) {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const courseId = params.id;
 
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(true)
+  const getCourse = async (
+    courseId: string
+  ): Promise<{ courseName: string } | null> => {
+    try {
+      const response = await fetch("http://localhost:3001/course/${courseId}");
+      const data = await response.json();
+      return data;
+    } catch (reason) {
+      return null;
+    }
+  };
 
   useEffect(() => {
-    fetch('/api/profile-data')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
-  }, [])
+    getCourse(courseId).then((data: any) => {
+      console.log("data is ", data);
+      setData(data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <>
@@ -22,7 +33,7 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
         <div className="flex flex-col w-2/3 bg-white rounded">
           <div className="w-full flex m-4">
             <div className="mb-4 w-1/2">
-              <p className="font-bold">Course Name</p>
+              <p className="font-bold">{data?.courseName}</p>
               <p className="font-medium"> This is detail course xxxxxx.</p>
             </div>
             <div className="m-4 w-1/2 flex flex-wrap gap-2">
