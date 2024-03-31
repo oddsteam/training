@@ -25,7 +25,7 @@ export default async function Home() {
       <div className="max-w-7xl mx-auto w-full">
         <h1 className="text-xl">Courses</h1>
         <div className="m-6 max-w-7xl mx-auto">
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {courses.length > 0
               ? courses.map((course) => (
                   <Course
