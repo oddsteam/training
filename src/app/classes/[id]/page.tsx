@@ -1,5 +1,10 @@
-export default function ClassDetail() {
-  return <div className="h-max">
+export default async function ClassDetail() {
+  const classDetail = await getClassDetail()
+  console.log(classDetail);
+  const classRemaing = await getClassRemaing()
+  console.log(classRemaing);
+
+return <div className="h-max">
   <div>
   <div>
       <h1>[Class name]</h1>
@@ -39,4 +44,20 @@ export default function ClassDetail() {
   </div>
 </div>
   </div>
+}
+
+async function getClassDetail() {
+  const res = await fetch('http://localhost:3001/classes/1')
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  return res.json()
+}
+
+async function getClassRemaing() {
+  const res = await fetch('http://localhost:3001/classes/1/remaing')
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  return res.json()
 }
