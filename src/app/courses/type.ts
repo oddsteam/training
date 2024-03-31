@@ -1,14 +1,9 @@
 export interface ICourse {
+  _id: string;
   courseName: string;
-  outline: string;
-  agenda: string;
-  afterSaleService: string;
+  courseOutline: string;
+  courseOutlineEn: string;
+  price: number;
   images: string[];
-  trainer: Trainer[];
-}
-
-interface Trainer {
-  name: string;
-  image: string;
-  experience: string;
+  createdAt: string;
 }
