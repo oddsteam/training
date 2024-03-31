@@ -44,7 +44,7 @@ const RegisterForm = () => {
     <div className="h-screen flex justify-center bg-gray-100">
       <div className="container mx-auto p-4 m-6">
         <h1 className="text-2xl mb-4">Register Form</h1>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 border">
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 border rounded-md">
           <div className="flex flex-col m-6">
             <label htmlFor="fullName" className="mb-1">
               Full Name
