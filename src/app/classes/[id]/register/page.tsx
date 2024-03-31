@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from 'next/navigation'
 
 const RegisterForm = () => {
+  const params = useParams<{ id: string;}>()
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -33,8 +36,24 @@ const RegisterForm = () => {
     e.preventDefault();
     console.log(formData);
     validateOnSubmit(formData.fullName, formData.email);
-    // Here you can add your form submission logic
+    callRegisterService(formData.fullName, formData.email, formData.company, formData.phone);
   };
+
+  const callRegisterService = async (fullName: string, email: string, company: string, phone: string) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+        company,
+        phoneNumber: phone,
+        classId: params.id,
+      }),
+    });
+  }
 
   const validateOnSubmit = (fullName: string, email: string) => {
     let fullNameErrorMsg = fullName ? "" : "The full name field is required";
@@ -76,9 +95,9 @@ const RegisterForm = () => {
               onChange={handleChange}
               className="border p-2 rounded w-full"
             />
-            <label className="mb-1 text-red-500">
+            {formDataErrorMsg.fullName && <label className="mb-1 text-red-500">
               {formDataErrorMsg.fullName}
-            </label>
+            </label>}
           </div>
           <div className="flex flex-col m-6">
             <label htmlFor="email" className="mb-1">
@@ -92,9 +111,9 @@ const RegisterForm = () => {
               onChange={handleChange}
               className="border p-2 rounded w-full"
             />
-            <label className="mb-1 text-red-500">
+            {formDataErrorMsg.email && <label className="mb-1 text-red-500">
               {formDataErrorMsg.email}
-            </label>
+            </label>}
           </div>
           <div className="flex flex-col m-6">
             <label htmlFor="company" className="mb-1">
