@@ -182,6 +182,7 @@ function ClassItem(
       <td className="px-6 py-4">
         <button onClick={() => {
           //TODO: navigate to register screen
+          window.location.href = `classes/${id}/register`
         }} className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">Register</button>
       </td>
     </tr>
