@@ -29,7 +29,9 @@ export default async function Home() {
             {courses.length > 0
               ? courses.map((course) => (
                   <Course
+                    key={course._id}
                     course={{
+                      id: course._id,
                       courseName: course.courseName,
                       outline: course.courseOutline,
                       images: course.images,
