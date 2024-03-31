@@ -40,8 +40,8 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
           <div className="w-full flex m-4">
             <div className="ms-2 mb-6 w-1/2">
               <div className="mb-6">
-                <p className="font-xl font-bold">{data?.courseName}</p>
-                <p className="font-base"> This is detail course xxxxxx.</p>
+                <p className="font-xl font-bold">Course Name</p>
+                <p className="font-base">{data?.courseName}</p>
               </div>
               <div className="mb-6">
                 <h1 className="font-xl font-bold">Outline</h1>
