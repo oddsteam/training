@@ -3,11 +3,17 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+export type Instructors =  {
+  name: string;
+  image: string;
+}
+
 export type CourseDetail = {
   courseName: string;
   outline: string;
   images: string[];
   duration: string;
+  instructors: Instructors[];
 };
 
 export default function CourseDetail({ params }: { params: { id: string } }) {
@@ -68,26 +74,19 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
           </div>
         </div>
         <div className="mb-4 w-1/3 rounded flex flex-col">
-          <div className="flex flex-col items-center border-solid border-b-4 m-4">
-            <Image
-              src="/odds-buly.jpeg"
-              width={200}
-              height={200}
-              className="block rounded-lg object-center"
-              alt="Picture of the author"
-            />
-            <h1 className="m-5">Phongsak Ritpitakphong</h1>
-          </div>
-          <div className="flex flex-col items-center border-solid border-b-4 m-5">
-            <Image
-              src="/odds-buly.jpeg"
-              width={200}
-              height={200}
-              className="block rounded-lg object-center"
-              alt="Picture of the author"
-            />
-            <h1 className="m-5">Phongsak Ritpitakphong</h1>
-          </div>
+          {data?.instructors?.length > 0 ? data?.instructors.map((instructor) => (
+            <div className="flex flex-col items-center border-solid border-b-4 m-4">
+              <Image
+                key={instructor.image}
+                src={instructor.image}
+                width={200}
+                height={200}
+                className="block rounded-lg object-center"
+                alt="Picture of the author"
+              />
+              <h1 className="m-5">instructor.name</h1>
+            </div>
+          )) : []}
         </div>
       </div>
     </>
