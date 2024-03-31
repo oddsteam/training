@@ -1,7 +1,7 @@
-export default async function ClassDetail() {
-  const classDetail = await getClassDetail()
+export default async function ClassDetail({ params }: { params: { id: string } }) {
+  const classDetail = await getClassDetail(params.id)
   console.log(classDetail);
-  const classRemaing = await getClassRemaing()
+  const classRemaing = await getClassRemaing(params.id)
   console.log(classRemaing);
 
 return <div className="h-max">
@@ -47,16 +47,16 @@ return <div className="h-max">
   </div>
 }
 
-async function getClassDetail() {
-  const res = await fetch('http://localhost:3001/classes/1')
+async function getClassDetail(id: string) {
+  const res = await fetch(`http://localhost:3001/classes/${id}`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
   return res.json()
 }
 
-async function getClassRemaing() {
-  const res = await fetch('http://localhost:3001/classes/1/remaing')
+async function getClassRemaing(id: string) {
+  const res = await fetch(`http://localhost:3001/classes/${id}/remaing`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
