@@ -56,15 +56,21 @@ const RegisterForm = () => {
     }
   };
 
+  const isFormNotValid = () => {
+    const fullNameErrorMsg = formData.fullName;
+    const emailErrorMsg = formData.email;
+    return !fullNameErrorMsg || !emailErrorMsg;
+  };
+
   return (
     <div className="h-screen flex justify-center bg-white">
-      <div className="container mx-auto p-4 m-6">
-        <h1 className="text-2xl mb-4">Register Form</h1>
+      <div className="container mx-auto p-4">
+        <h1 className="text-xl mb-4">Register Form</h1>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-2 gap-4 border border-slate-200 rounded-md"
+          className="grid grid-cols-2 gap-4 border border-slate-200 rounded-md p-6"
         >
-          <div className="flex flex-col m-6">
+          <div className="flex flex-col">
             <label htmlFor="fullName" className="mb-1">
               Full Name *
             </label>
@@ -80,7 +86,7 @@ const RegisterForm = () => {
               {formDataErrorMsg.fullName}
             </label>
           </div>
-          <div className="flex flex-col m-6">
+          <div className="flex flex-col ">
             <label htmlFor="email" className="mb-1">
               Email *
             </label>
@@ -96,7 +102,7 @@ const RegisterForm = () => {
               {formDataErrorMsg.email}
             </label>
           </div>
-          <div className="flex flex-col m-6">
+          <div className="flex flex-col ">
             <label htmlFor="company" className="mb-1">
               Company
             </label>
@@ -109,7 +115,7 @@ const RegisterForm = () => {
               className="border p-2 rounded w-full"
             />
           </div>
-          <div className="flex flex-col m-6">
+          <div className="flex flex-col ">
             <label htmlFor="phone" className="mb-1">
               Phone Number
             </label>
@@ -124,7 +130,11 @@ const RegisterForm = () => {
           </div>
           <button
             type="submit"
-            className="col-span-2 bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 m-6 justify-self-end"
+            className={`col-span-2 px-4 py-2 rounded justify-self-end ${
+              !isFormNotValid()
+                ? "bg-blue-700 text-white hover:bg-blue-600"
+                : "bg-blue-100 text-blue-300 cursor-not-allowed"
+            }`}
           >
             Submit
           </button>
@@ -181,7 +191,7 @@ const RegisterForm = () => {
                 <button
                   onClick={toggleModal}
                   type="button"
-                  className="py-2 px-3 text-sm font-medium text-center rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900"
+                  className="py-2 px-3 text-sm font-medium text-center rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900 bg-blue-700 text-white hover:bg-blue-600"
                 >
                   Done
                 </button>
