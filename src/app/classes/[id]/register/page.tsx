@@ -18,11 +18,27 @@ const RegisterForm = () => {
     });
   };
 
+  const [formDataErrorMsg, setFormDataErrorMsg] = useState({
+    fullName: '',
+    email: '',
+  });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
+    validateOnSubmit(formData.fullName, formData.email);
     // Here you can add your form submission logic
   };
+
+  const validateOnSubmit = (fullName: string, email: string) => {
+    let fullNameErrorMsg = fullName ? '' : 'Missing firstname';
+    let emailErrorMsg = email ? '' : 'Missing email';
+    setFormDataErrorMsg({
+      fullName: fullNameErrorMsg,
+      email: emailErrorMsg,
+    });
+    if (fullNameErrorMsg || emailErrorMsg) throw new Error('Validate form failed');
+  }
 
   return (
     <div className="h-screen flex justify-center bg-gray-100">
@@ -40,8 +56,10 @@ const RegisterForm = () => {
               value={formData.fullName}
               onChange={handleChange}
               className="border p-2 rounded w-full"
-              required
             />
+            <label className="mb-1 text-red-500">
+              {formDataErrorMsg.fullName}
+            </label>
           </div>
           <div className="flex flex-col m-6">
             <label htmlFor="email" className="mb-1">
@@ -54,8 +72,10 @@ const RegisterForm = () => {
               value={formData.email}
               onChange={handleChange}
               className="border p-2 rounded w-full"
-              required
             />
+            <label className="mb-1 text-red-500">
+              {formDataErrorMsg.email}
+            </label>
           </div>
           <div className="flex flex-col m-6">
             <label htmlFor="company" className="mb-1">
