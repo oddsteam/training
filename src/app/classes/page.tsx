@@ -1,5 +1,10 @@
+"use client"
+
+import { redirect } from "next/navigation"
+import Link from "next/link"
+
 export default function Classes() {
-  
+
   const data = [
     {
       id: 1,
@@ -10,7 +15,7 @@ export default function Classes() {
       startTime: '9:00',
       endTime: '17:00',
       duration: 3,
-      maxParticipant:30,
+      maxParticipant: 30,
       participants: 20,
       price: 2000,
       instructions: [
@@ -34,7 +39,7 @@ export default function Classes() {
       startTime: '9:00',
       endTime: '17:00',
       duration: 3,
-      maxParticipant:30,
+      maxParticipant: 30,
       participants: 15,
       price: 3000,
       instructions: [
@@ -58,7 +63,7 @@ export default function Classes() {
       startTime: '9:00',
       endTime: '17:00',
       duration: 1,
-      maxParticipant:30,
+      maxParticipant: 30,
       participants: 1,
       price: 4000,
       instructions: [
@@ -82,7 +87,7 @@ export default function Classes() {
       startTime: '9:00',
       endTime: '17:00',
       duration: 3,
-      maxParticipant:30,
+      maxParticipant: 30,
       participants: 30,
       price: 3000,
       instructions: [
@@ -100,61 +105,85 @@ export default function Classes() {
   ]
 
   return (
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <h1>Hello, Classes List Page!</h1>
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-300 dark:text-black">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Date
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Trainers
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Participants
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Location
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    
-                </th>
-            </tr>
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-300 dark:text-black">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Date
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Trainers
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Price
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Participants
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Location
+            </th>
+            <th scope="col" className="px-6 py-3">
+
+            </th>
+          </tr>
         </thead>
         <tbody>
-      { 
-        data.map((datas) => ( 
-        // <div key={datas.id}>{datas.id} sdsa</div> 
-            <tr class="bg-white border-b dark:bg-white dark:border-gray-200 hover:bg-blue-100 dark:hover:bg-blue-100 text-black" key={datas.id}>
-                
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                  { datas.startDate }
-                </th> 
-                <td class="px-6 py-4">
-                  { datas.instructions?.map(instruction => (instruction?.name) ) }
-                </td>
-                <td class="px-6 py-4">
-                  { datas.price }
-                </td>
-                <td class="px-6 py-4">
-                  { datas.participants } / { datas.maxParticipant }
-                </td>
-                <td class="px-6 py-4">
-                  { datas.location }
-                </td>
-                <td class="px-6 py-4">
-                  <button class="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">Register</button>
-                </td>
-              
-            </tr>
-        ))
-      }
-      </tbody>
+          {
+            data.map((datas) => (
+              ClassItem(
+                datas.id,
+                datas.startDate,
+                datas.instructions,
+                datas.price,
+                datas.participants,
+                datas.maxParticipant,
+                datas.location
+              )
+            ))
+          }
+        </tbody>
       </table>
     </div>
   )
+}
+
+
+
+function ClassItem(
+  id: number,
+  startDate: string,
+  instructions: Array<{ name: string }>,
+  price: number,
+  participants: number,
+  maxParticipant: number,
+  location: string
+) {
+  return <>
+    <tr className="bg-white border-b dark:bg-white dark:border-gray-200 hover:bg-blue-100 dark:hover:bg-blue-100 text-black" key={id}>
+
+      <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+        {startDate}
+      </th>
+      <td className="px-6 py-4">
+        {instructions?.map(instruction => (instruction?.name))}
+      </td>
+      <td className="px-6 py-4">
+        {price}
+      </td>
+      <td className="px-6 py-4">
+        {participants} / {maxParticipant}
+      </td>
+      <td className="px-6 py-4">
+        {location}
+      </td>
+      <td className="px-6 py-4">
+        <button onClick={() => {
+          //TODO: navigate to register screen
+        }} className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">Register</button>
+      </td>
+    </tr>
+  </>;
 }
