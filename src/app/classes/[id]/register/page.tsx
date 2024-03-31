@@ -105,7 +105,7 @@ const RegisterForm = () => {
           </div>
           <button
             type="submit"
-            className="col-span-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 m-6 justify-self-end"
+            className="col-span-2 bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 m-6 justify-self-end"
           >
             Submit
           </button>
