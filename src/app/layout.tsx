@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="bg-white">
+        <header className="bg-black">
           <nav
             className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
             aria-label="Global"
@@ -25,7 +25,7 @@ export default function RootLayout({
             <div className="flex lg:flex-1">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <h1>ODDS| Training</h1>
+                <h1 className="text-white text-xl font-bold">ODDS| Training</h1>
               </a>
             </div>
             <div className="flex lg:hidden"></div>

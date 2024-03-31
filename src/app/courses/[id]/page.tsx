@@ -1,8 +1,24 @@
+"use client"
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 export default function CourseDetail({ params }: { params: { id: string } }) {
+
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/profile-data')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
   return (
     <>
-      <div className="flex justify-between m-4 gap-2">
+      <div className="flex w-full justify-between p-4 gap-2 bg-white">
         <div className="flex flex-col w-2/3 bg-white rounded">
           <div className="w-full flex m-4">
             <div className="mb-4 w-1/2">
