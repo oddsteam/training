@@ -41,35 +41,16 @@ export default function CourseDetail({ params }: { params: { id: string } }) {
               <p className="font-medium"> This is detail course xxxxxx.</p>
             </div>
             <div className="m-4 w-1/2 flex flex-wrap gap-2">
-              {data?.images}
-              <Image
-                src="/odds-buly.jpeg"
-                width={200}
-                height={200}
-                className="block rounded-lg object-center"
-                alt="Picture of the author"
-              />
-              <Image
-                src="/odds-buly.jpeg"
-                width={200}
-                height={200}
-                className="block rounded-lg object-center"
-                alt="Picture of the author"
-              />
-              <Image
-                src="/odds-buly.jpeg"
-                width={200}
-                height={200}
-                className="block rounded-lg object-center"
-                alt="Picture of the author"
-              />
-              <Image
-                src="/odds-buly.jpeg"
-                width={200}
-                height={200}
-                className="block rounded-lg object-center"
-                alt="Picture of the author"
-              />
+              {data?.images.map((image) => (
+                <Image
+                  key={image}
+                  src="/odds-buly.jpeg"
+                  width={200}
+                  height={200}
+                  className="block rounded-lg object-center"
+                  alt="Picture of the author"
+                />
+              ))}
             </div>
           </div>
           <div className="m-4">
