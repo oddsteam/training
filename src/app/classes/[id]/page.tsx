@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default async function ClassDetail({ params }: { params: { id: string } }) {
   const classDetail = await getClassDetail(params.id)
   console.log(classDetail);
@@ -37,9 +39,11 @@ export default async function ClassDetail({ params }: { params: { id: string } }
         </div>
       </div>
       <div className="w-full flex flex-row-reverse items-end">
-        <button type="submit" className="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Register
-        </button>
+        <Link href={`${params.id}/register`}>
+          <button type="submit" className="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Register
+          </button>
+        </Link>
       </div>
     </div>
   </div>
