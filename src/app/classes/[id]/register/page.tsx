@@ -38,7 +38,6 @@ const RegisterForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
     validateOnSubmit(formData.fullName, formData.email);
     callRegisterService(formData.fullName, formData.email, formData.company, formData.phone);
   };
