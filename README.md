@@ -1,3 +1,11 @@
+# ENV for local
+
+create .env file 
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
 # Training
 
 node v20
